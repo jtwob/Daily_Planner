@@ -1,16 +1,56 @@
 $(document).ready(function () {
-    const currentTime = moment().format('MMMM Do YYYY');
-    $("#time").text(currentTime);
+    // const currentTime = moment().format('MMMM Do YYYY');
+    // $("#time").text(currentTime);
 
     $("span").attr("style", "width: 75px");
-    $("h1").attr("style", "text-align: center");
+    // $("h1").attr("style", "text-align: center");
 
-    const times = [7, 8, 9, 10, 22, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    const times = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
     times.forEach(time => {
-        const timeCheck = window.localStorage.getItem(time);
+        let am = "am";
+        let pm = "pm";
 
+        const timeCheck = window.localStorage.getItem(time);
         const currentHour = moment().hour();
+
+        let blockElement = $("<div>");
+        let blockElementCol = $("<div>");
+        let blockForm = $("<form>");
+        let blockInGroup = $("<div>");
+        let blockPrepend = $("<div>");
+        let blockSpan = $("<span>");
+        let blockInput = $("<input>");
+        let blockAppend = $("<div>");
+        let blockButton = $("<button>");
+
+
+        blockElement.addClass("row");
+        blockElementCol.addClass("col-sm-12");
+        blockInGroup.addClass("input-group mb-3");
+        blockPrepend.addClass("input-group-prepend");
+        blockSpan.addClass("input-group-text");
+        blockSpan.attr("id", "basic-addon1");
+        blockSpan.text(`${time > 12 ? time - 12 : time}${time >= 12 ? pm : am}`);
+        blockInput.attr("id", time);
+        blockInput.attr("type", "text");
+        blockAppend.addClass("input-group-append");
+        blockButton.addClass("btn btn-outline-secondary");
+        blockButton.attr("type", "submit");
+        blockButton.attr("id", "button-addon2");
+        blockButton.text("+");
+
+        blockAppend.append(blockButton);
+        blockPrepend.append(blockSpan);
+        blockInGroup.append(blockPrepend);
+        blockInGroup.append(blockInput);
+        blockInGroup.append(blockAppend);
+        blockForm.append(blockInGroup);
+        blockElementCol.append(blockForm);
+        blockElement.append(blockElementCol);
+
+        $("#time-block").append(blockElement);
+
         console.log(currentHour);
         console.log(time);
         if (currentHour > time) {
