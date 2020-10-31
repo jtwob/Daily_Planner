@@ -1,9 +1,4 @@
 $(document).ready(function () {
-    // const currentTime = moment().format('MMMM Do YYYY');
-    // $("#time").text(currentTime);
-
-    $("span").attr("style", "width: 75px");
-    // $("h1").attr("style", "text-align: center");
 
     const times = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
@@ -26,7 +21,7 @@ $(document).ready(function () {
 
 
         blockElement.addClass("row");
-        blockElementCol.addClass("col-sm-12");
+        blockElementCol.addClass("col-12");
         blockInGroup.addClass("input-group mb-3");
         blockPrepend.addClass("input-group-prepend");
         blockSpan.addClass("input-group-text");
@@ -34,6 +29,8 @@ $(document).ready(function () {
         blockSpan.text(`${time > 12 ? time - 12 : time}${time >= 12 ? pm : am}`);
         blockInput.attr("id", time);
         blockInput.attr("type", "text");
+        blockInput.addClass("col-10");
+        blockInput.attr("style", "height: 80px;");
         blockAppend.addClass("input-group-append");
         blockButton.addClass("btn btn-outline-secondary");
         blockButton.attr("type", "submit");
@@ -50,6 +47,7 @@ $(document).ready(function () {
         blockElement.append(blockElementCol);
 
         $("#time-block").append(blockElement);
+        $("span").attr("style", "width: 75px");
 
         console.log(currentHour);
         console.log(time);
