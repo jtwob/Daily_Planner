@@ -1,8 +1,9 @@
 $(document).ready(function () {
 
     //Array of military times to produce row elements
-    const times = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-
+    const times = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+    const currentTime = moment().format('MMMM Do YYYY');
+    $("#currentDay").text(currentTime);
     //for each loop that takes each time in the above array and produces the necessary html with jquery
     times.forEach(time => {
         let am = "am";
@@ -59,7 +60,6 @@ $(document).ready(function () {
         //logic for coloring and disabling hours that have past, current hour, and hours left
         if (currentHour > time) {
             $(`#${time}`).addClass("bg-danger text-light");
-            $(`#${time}`).attr("disabled", true);
         } else if (currentHour === time) {
             $(`#${time}`).addClass("bg-secondary text-light");
         } else {
