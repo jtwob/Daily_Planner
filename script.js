@@ -1,14 +1,18 @@
 $(document).ready(function () {
 
+    //Array of military times to produce row elements
     const times = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
+    //for each loop that takes each time in the above array and produces the necessary html with jquery
     times.forEach(time => {
         let am = "am";
         let pm = "pm";
 
+        //check local storage for current time stored data and checks current hour with the moment.js library
         const timeCheck = window.localStorage.getItem(time);
         const currentHour = moment().hour();
 
+        //init declaration of html elements with jquery
         let blockElement = $("<div>");
         let blockElementCol = $("<div>");
         let blockForm = $("<form>");
@@ -19,7 +23,7 @@ $(document).ready(function () {
         let blockAppend = $("<div>");
         let blockButton = $("<button>");
 
-
+        //modification of html elements
         blockElement.addClass("row");
         blockElementCol.addClass("col-12");
         blockInGroup.addClass("input-group mb-3");
@@ -37,6 +41,7 @@ $(document).ready(function () {
         blockButton.attr("id", "button-addon2");
         blockButton.text("+");
 
+        //construction of the time slot
         blockAppend.append(blockButton);
         blockPrepend.append(blockSpan);
         blockInGroup.append(blockPrepend);
@@ -45,12 +50,13 @@ $(document).ready(function () {
         blockForm.append(blockInGroup);
         blockElementCol.append(blockForm);
         blockElement.append(blockElementCol);
-
-        $("#time-block").append(blockElement);
         $("span").attr("style", "width: 75px");
 
-        console.log(currentHour);
-        console.log(time);
+        //appending time slot to the html doc 
+        $("#time-block").append(blockElement);
+
+
+        //logic for coloring and disabling hours that have past, current hour, and hours left
         if (currentHour > time) {
             $(`#${time}`).addClass("bg-danger text-light");
             $(`#${time}`).attr("disabled", true);
@@ -67,6 +73,7 @@ $(document).ready(function () {
         }
     })
 
+    //sets local storage text and time values
     $("form").on("submit", function (e) {
         e.preventDefault();
         const time = e.target.querySelector("input").getAttribute("id");
